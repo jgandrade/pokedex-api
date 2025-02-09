@@ -4,8 +4,11 @@ from typing import Generic, TypeVar
 T = TypeVar("T")
 
 
-class BaseController(Generic[T], ABC):
+class Mapper(Generic[T], ABC):
+    @abstractmethod
+    def toPersistence(self):
+        pass
 
     @abstractmethod
-    def findById(self):
+    def toDomain(self):
         pass

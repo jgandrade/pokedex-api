@@ -4,7 +4,10 @@ from typing import Generic, TypeVar
 T = TypeVar("T")
 
 
-class BaseController(Generic[T], ABC):
+class Repository(Generic[T], ABC):
+    @abstractmethod
+    def save(self):
+        pass
 
     @abstractmethod
     def findById(self):
