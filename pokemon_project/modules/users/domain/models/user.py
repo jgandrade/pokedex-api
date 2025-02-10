@@ -3,7 +3,8 @@ from django.db import models
 from django.utils import timezone
 
 
-class User(BaseModel):
+class UserModel(BaseModel):
+    id = models.CharField(max_length=36, unique=True, primary_key=True)
     user_id = models.CharField(max_length=36, unique=True, primary_key=True)
     full_name = models.CharField(max_length=255)
     user_name = models.CharField(max_length=255, unique=True)

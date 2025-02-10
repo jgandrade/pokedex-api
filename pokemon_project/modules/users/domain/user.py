@@ -1,20 +1,26 @@
 from pokemon_project.core.domain.aggregateRoot import AggregateRoot
 from pokemon_project.core.domain.uniqueEntityId import UniqueEntityId
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import Union
+from datetime import datetime, timezone
 
 
 class UserProps(BaseModel):
+    id: str
     userId: str
     fullName: str
     userName: str
     email: str
     password: str
-    profilePictureURL: str
-    isEmailVerified: bool
-    pokemonStoreId: str
-    createdAt: str
-    updatedAt: str
+    profilePictureURL: str | None = None
+    isEmailVerified: bool = False
+    pokemonStoreId: str | None = None
+    createdAt: str = Field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
+    updatedAt: str = Field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
 
 
 class User(AggregateRoot):
@@ -26,8 +32,17 @@ class User(AggregateRoot):
         return User(user_props, id)
 
     @staticmethod
-    def createWithDefaults(id: Union[UniqueEntityId, str, int, None] = None):
-        return User(UserProps(name="Default", age=0), id)
+    def createWithDefaults(props: dict):
+        default_props = {
+            "userId": UniqueEntityId(None).toValue(),
+            "profilePictureURL": None,
+            "isEmailVerified": False,
+            "pokemonStoreId": None,
+            "createdAt": datetime.now(timezone.utc).isoformat(),
+            "updatedAt": datetime.now(timezone.utc).isoformat(),
+        }
+        merged_props = {**default_props, **props}
+        return User.create(merged_props)
 
     @property
     def userId(self) -> str:
