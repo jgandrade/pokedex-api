@@ -20,6 +20,16 @@ class JWTService:
         return encoded_jwt
 
     @staticmethod
+    def create_email_token(data: Dict, expires_delta: timedelta = None):
+        to_encode = data.copy()
+        expire = datetime.now(timezone.utc) + (
+            expires_delta or timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+        )
+        to_encode.update({"exp": expire})
+        encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+        return encoded_jwt
+
+    @staticmethod
     def decode_token(token: str):
         try:
             payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])

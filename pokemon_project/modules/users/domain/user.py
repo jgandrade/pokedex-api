@@ -6,7 +6,6 @@ from datetime import datetime, timezone
 
 
 class UserProps(BaseModel):
-    id: str
     userId: str
     fullName: str
     userName: str
@@ -42,6 +41,7 @@ class User(AggregateRoot):
             "updatedAt": datetime.now(timezone.utc).isoformat(),
         }
         merged_props = {**default_props, **props}
+        
         return User.create(merged_props)
 
     @property
