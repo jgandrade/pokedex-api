@@ -1,8 +1,8 @@
-from pokemon_project.core.persistence.repository import Repository
-from pokemon_project.modules.users.domain.user import User
-from pokemon_project.modules.users.persistence.userMapper import UserMapper
-from pokemon_project.modules.users.domain.models.user import UserModel
-from pokemon_project.core.domain.uniqueEntityId import UniqueEntityId
+from core.persistence.repository import Repository
+from modules.users.domain.user import User
+from modules.users.persistence.userMapper import UserMapper
+from modules.users.domain.models.user import UserModel
+from core.domain.uniqueEntityId import UniqueEntityId
 
 
 class UserRepository(Repository):
@@ -12,7 +12,7 @@ class UserRepository(Repository):
 
     def findById(self, user_id: UniqueEntityId) -> User | None:
         try:
-            user_model = UserModel.objects.get(user_id=user_id.toValue())
+            user_model = UserModel.objects.get(user_id=user_id)
             return UserMapper.toDomain(user_model)
         except UserModel.DoesNotExist:
             return None

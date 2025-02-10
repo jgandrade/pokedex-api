@@ -1,9 +1,9 @@
-from pokemon_project.core.persistence.mapper import Mapper
-from pokemon_project.core.domain.uniqueEntityId import UniqueEntityId
-from pokemon_project.modules.users.domain.user import (
+from core.persistence.mapper import Mapper
+from core.domain.uniqueEntityId import UniqueEntityId
+from modules.users.domain.user import (
     User,
 )
-from pokemon_project.modules.users.domain.models.user import UserModel
+from modules.users.domain.models.user import UserModel
 
 
 class UserMapper(Mapper):
@@ -28,7 +28,7 @@ class UserMapper(Mapper):
     @staticmethod
     def toPersistence(user: User) -> UserModel:
         return UserModel(
-            id = user.id,
+            id=user.id,
             user_id=user.userId,
             full_name=user.fullName,
             user_name=user.userName,

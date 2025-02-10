@@ -1,5 +1,5 @@
 from uuid import uuid4
-from pokemon_project.core.domain.identifier import Identifier
+from core.domain.identifier import Identifier
 from typing import Union
 
 

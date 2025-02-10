@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Generic, TypeVar
-from pokemon_project.core.domain.uniqueEntityId import UniqueEntityId
+from core.domain.uniqueEntityId import UniqueEntityId
 
 T = TypeVar("T")
 

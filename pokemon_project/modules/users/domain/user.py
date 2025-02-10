@@ -1,5 +1,5 @@
-from pokemon_project.core.domain.aggregateRoot import AggregateRoot
-from pokemon_project.core.domain.uniqueEntityId import UniqueEntityId
+from core.domain.aggregateRoot import AggregateRoot
+from core.domain.uniqueEntityId import UniqueEntityId
 from pydantic import BaseModel, Field
 from typing import Union
 from datetime import datetime, timezone
